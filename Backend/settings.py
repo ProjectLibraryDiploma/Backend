@@ -25,8 +25,9 @@ SECRET_KEY = 'django-insecure-p*g1gopn57933i3_jwg*s#d2n9y)64xf!72wc^g7p(@=yhb7p(
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
+AUTH_USER_MODEL = "book_sender.User"
 
 # Application definition
 
@@ -37,6 +38,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+
+    'book_sender'
 ]
 
 MIDDLEWARE = [
