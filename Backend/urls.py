@@ -15,7 +15,19 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+from rest_framework import routers
+
+from book_sender.views import GetNewBooks, HomeView, GetEmailConfirmarionView, ConfirmEmailView, ChooseCategoryView
+
+router = routers.SimpleRouter()
+router.register(r'get_books', GetNewBooks, basename="Books")
 
 urlpatterns = [
+    path('', HomeView.as_view(), name="home"),
+    path('email/', GetEmailConfirmarionView.as_view()),
+    path('check_email/email=<email>/token=<token>', ConfirmEmailView.as_view()),
+    path('select_categories/', ChooseCategoryView.as_view(), name='choose_category'),
     path('admin/', admin.site.urls),
 ]
+
+urlpatterns += router.urls
