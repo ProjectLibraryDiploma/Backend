@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+
+<head>
+    <title>BookSender</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <style type="text/css">
+        html {
+            -webkit-text-size-adjust: none;
+            -ms-text-size-adjust: none;
+        }
+    </style>
+</head>
+
+<body style="font-family: 'Montserrat',sans-serif; background-color: #E0E0E0; margin: 0px; padding: 50px 0;">
+    <table class="init-table" style="font-family: 'Montserrat',sans-serif; background-color: #fff; border: none; border-spacing: 0px; margin: 0 auto; padding: 0px; width: 600px;">
+        <tbody style="font-family: 'Montserrat',sans-serif; margin: 0px; padding: 0px;">
+            <tr class="header-row" style="font-family: 'Montserrat',sans-serif; background-color: #333; color: #fff; font-size: 14px; font-weight: 500; margin: 0px; padding: 0px; text-align: center;">
+                <td style="font-family: 'Montserrat',sans-serif; margin: 0px; padding: 8px 0;">Кращий сайт для отримання нових книг</td>
+            </tr>
+            <tr style="font-family: 'Montserrat',sans-serif; margin: 0px; padding: 0px;">
+                <td style="font-family: 'Montserrat',sans-serif; margin: 0px; padding: 0px;">
+                    <table class="header-table" style="font-family: 'Montserrat',sans-serif; border: none; border-spacing: 0px; margin: 0px; padding: 0px; width: 100%;">
+                        <tbody style="font-family: 'Montserrat',sans-serif; margin: 0px; padding: 0px;">
+                        <tr height="20px" style="font-family: 'Montserrat',sans-serif; margin: 0px; padding: 0px;">
+                            <td colspan="3" style="font-family: 'Montserrat',sans-serif; margin: 0px; padding: 0px; width: 30px;"></td>
+                        </tr>
+                        <tr style="font-family: 'Montserrat',sans-serif; margin: 0px; padding: 0px;">
+                            <td style="font-family: 'Montserrat',sans-serif; margin: 0px; padding: 0px; width: 30px;"></td>
+                            <td style="font-family: 'Montserrat',sans-serif; margin: 0px; padding: 0px;">
+
+                            </td>
+                            <td style="font-family: 'Montserrat',sans-serif; margin: 0px; padding: 0px; width: 30px;"></td>
+                        </tr>
+                        <tr height="30px" style="font-family: 'Montserrat',sans-serif; margin: 0px; padding: 0px;">
+                            <td colspan="3" style="font-family: 'Montserrat',sans-serif; margin: 0px; padding: 0px; width: 30px;"></td>
+                        </tr>
+                        <tr style="font-family: 'Montserrat',sans-serif; margin: 0px; padding: 0px;">
+                            <td style="font-family: 'Montserrat',sans-serif; margin: 0px; padding: 0px; width: 30px;"></td>
+                            <td style="font-family: 'Montserrat',sans-serif; margin: 0px; padding: 0px;">
+                                <span class="email-header" style="font-family: 'Montserrat',sans-serif; color: #000; font-size: 20px; font-weight: 500; margin: 0px; padding: 0px;"> дякуємо за вашу підписку!</span>
+                            </td>
+                            <td style="font-family: 'Montserrat',sans-serif; margin: 0px; padding: 0px; width: 30px;"></td>
+                        </tr>
+                        <tr height="24px" style="font-family: 'Montserrat',sans-serif; margin: 0px; padding: 0px;">
+                            <td colspan="3" style="font-family: 'Montserrat',sans-serif; margin: 0px; padding: 0px; width: 30px;"></td>
+                        </tr>
+                        <tr style="font-family: 'Montserrat',sans-serif; margin: 0px; padding: 0px;">
+                            <td style="font-family: 'Montserrat',sans-serif; margin: 0px; padding: 0px; width: 30px;"></td>
+                            <td style="font-family: 'Montserrat',sans-serif; margin: 0px; padding: 0px;">
+                                    <span class="email-text">
+                                        Для отримання можливості вибору категорій перейдіть по настуаному посиланню: {{ email_url }}.
+                                    </span>
+                            </td>
+
+                        </tbody>
+                    </table>
+                </td>
+            </tr>
+
+            <!-- LINE -->
+            <tr height="30px" style="font-family: 'Montserrat',sans-serif; margin: 0px; padding: 0px;">
+                <td style="font-family: 'Montserrat',sans-serif; margin: 0px; padding: 0px;">&nbsp;</td>
+            </tr>
+            <tr style="font-family: 'Montserrat',sans-serif; margin: 0px; padding: 0px;">
+                <td style="font-family: 'Montserrat',sans-serif; margin: 0px; padding: 0px;">
+                    <hr style="font-family: 'Montserrat',sans-serif; background-color: #EEE; border: none; height: 1px; margin: 0px; padding: 0px; width: 100%;">
+                </td>
+            </tr>
+            <tr height="30px" style="font-family: 'Montserrat',sans-serif; margin: 0px; padding: 0px;">
+                <td style="font-family: 'Montserrat',sans-serif; margin: 0px; padding: 0px;">&nbsp;</td>
+            </tr>
+            <!-- ENDLINE -->
+
+            <!-- LINE -->
+            <tr height="30px" style="font-family: 'Montserrat',sans-serif; margin: 0px; padding: 0px;">
+                <td style="font-family: 'Montserrat',sans-serif; margin: 0px; padding: 0px;">&nbsp;</td>
+            </tr>
+            <tr style="font-family: 'Montserrat',sans-serif; margin: 0px; padding: 0px;">
+                <td style="font-family: 'Montserrat',sans-serif; margin: 0px; padding: 0px;">
+                    <hr style="font-family: 'Montserrat',sans-serif; background-color: #EEE; border: none; height: 1px; margin: 0px; padding: 0px; width: 100%;">
+                </td>
+            </tr>
+            <tr height="30px" style="font-family: 'Montserrat',sans-serif; margin: 0px; padding: 0px;">
+                <td style="font-family: 'Montserrat',sans-serif; margin: 0px; padding: 0px;">&nbsp;</td>
+            </tr>
+            <!-- ENDLINE -->
+
+            <tr style="font-family: 'Montserrat',sans-serif; margin: 0px; padding: 0px;">
+                <td style="font-family: 'Montserrat',sans-serif; margin: 0px; padding: 0px;">
+                    <table class="main-table" style="font-family: 'Montserrat',sans-serif; border: none; border-spacing: 0px; margin: 0px; padding: 0px; width: 100%;">
+                        <tbody style="font-family: 'Montserrat',sans-serif; margin: 0px; padding: 0px;">
+                        <!--  -->
+                        <tr style="font-family: 'Montserrat',sans-serif; margin: 0px; padding: 0px;">
+                            <td style="font-family: 'Montserrat',sans-serif; margin: 0px; padding: 0px; width: 30px;"></td>
+                            <td style="font-family: 'Montserrat',sans-serif; margin: 0px; padding: 0px; width: 540px;">
+                                <span style="font-family: 'Montserrat',sans-serif; color: #000; font-size: 13px; font-weight: 600; margin: 0px; padding: 0px;">"Будемо раді відповісти на Ваші запитання:"</span>
+                            </td>
+                            <td style="font-family: 'Montserrat',sans-serif; margin: 0px; padding: 0px; width: 30px;"></td>
+                        </tr>
+                        <tr height="10px" style="font-family: 'Montserrat',sans-serif; margin: 0px; padding: 0px;">
+                            <td colspan="3" style="font-family: 'Montserrat',sans-serif; margin: 0px; padding: 0px; width: 30px;"></td>
+                        </tr>
+                        <!--  -->
+
+                        <!--  -->
+                        <tr style="font-family: 'Montserrat',sans-serif; margin: 0px; padding: 0px;">
+                            <td style="font-family: 'Montserrat',sans-serif; margin: 0px; padding: 0px; width: 30px;"></td>
+                            <td style="font-family: 'Montserrat',sans-serif; margin: 0px; padding: 0px; width: 540px;">
+                                <span class="contacts" style="font-family: 'Montserrat',sans-serif; color: #000; font-size: 13px; font-weight: 400; margin: 0px; padding: 0px;">пишіть - <a class="link" href="sirbarkalov@gmail.com" style="font-family: 'Montserrat',sans-serif; color: #000; margin: 0px; padding: 0px; text-decoration: underline;">sirbarkalov@gmail.com</a></span>
+                            </td>
+                            <td style="font-family: 'Montserrat',sans-serif; margin: 0px; padding: 0px; width: 30px;"></td>
+                        </tr>
+                        <tr height="10px" style="font-family: 'Montserrat',sans-serif; margin: 0px; padding: 0px;">
+                            <td colspan="3" style="font-family: 'Montserrat',sans-serif; margin: 0px; padding: 0px; width: 30px;"></td>
+                        </tr>
+                        <!--  -->
+
+                        <!--  -->
+                        <tr style="font-family: 'Montserrat',sans-serif; margin: 0px; padding: 0px;">
+                            <td style="font-family: 'Montserrat',sans-serif; margin: 0px; padding: 0px; width: 30px;"></td>
+                            <td style="font-family: 'Montserrat',sans-serif; margin: 0px; padding: 0px; width: 540px;">
+                                            <span class="contacts" style="font-family: 'Montserrat',sans-serif; color: #000; font-size: 13px; font-weight: 400; margin: 0px; padding: 0px;">телефонуйте -
+                                                <a class="link" href="tel:+380993722361" style="font-family: 'Montserrat',sans-serif; color: #000; margin: 0px; padding: 0px; text-decoration: underline;">+38 (099) 372-23-61</a>,
+                                            </span>
+                            </td>
+                            <td style="font-family: 'Montserrat',sans-serif; margin: 0px; padding: 0px; width: 30px;"></td>
+                        </tr>
+                        <tr height="10px" style="font-family: 'Montserrat',sans-serif; margin: 0px; padding: 0px;">
+                            <td colspan="3" style="font-family: 'Montserrat',sans-serif; margin: 0px; padding: 0px; width: 30px;"></td>
+                        </tr>
+                        <!--  -->
+                        </tbody>
+                    </table>
+                </td>
+            </tr>
+
+            <!-- LINE -->
+            <tr height="30px" style="font-family: 'Montserrat',sans-serif; margin: 0px; padding: 0px;">
+                <td style="font-family: 'Montserrat',sans-serif; margin: 0px; padding: 0px;">&nbsp;</td>
+            </tr>
+            <tr style="font-family: 'Montserrat',sans-serif; margin: 0px; padding: 0px;">
+                <td style="font-family: 'Montserrat',sans-serif; margin: 0px; padding: 0px;">
+                    <hr style="font-family: 'Montserrat',sans-serif; background-color: #EEE; border: none; height: 1px; margin: 0px; padding: 0px; width: 100%;">
+                </td>
+            </tr>
+            <tr height="30px" style="font-family: 'Montserrat',sans-serif; margin: 0px; padding: 0px;">
+                <td style="font-family: 'Montserrat',sans-serif; margin: 0px; padding: 0px;">&nbsp;</td>
+            </tr>
+            <!-- ENDLINE -->
+
+            <tr style="font-family: 'Montserrat',sans-serif; margin: 0px; padding: 0px;">
+                <td style="font-family: 'Montserrat',sans-serif; margin: 0px; padding: 0px;">
+                    <table class="footer-table" style="font-family: 'Montserrat',sans-serif; border: none; border-spacing: 0px; margin: 0px; padding: 0px; width: 100%;">
+                        <tbody style="font-family: 'Montserrat',sans-serif; margin: 0px; padding: 0px;">
+                        <!--  -->
+                        <tr style="font-family: 'Montserrat',sans-serif; margin: 0px; padding: 0px;">
+                            <td style="font-family: 'Montserrat',sans-serif; margin: 0px; padding: 0px; width: 30px;"></td>
+                            <td style="font-family: 'Montserrat',sans-serif; margin: 0px; padding: 0px;"><span style="font-family: 'Montserrat',sans-serif; color: #000; font-size: 14px; font-weight: 400; margin: 0px; padding: 0px;">З повагою,</span></td>
+                            <td style="font-family: 'Montserrat',sans-serif; margin: 0px; padding: 0px; width: 30px;"></td>
+                        </tr>
+                        <tr height="10px" style="font-family: 'Montserrat',sans-serif; margin: 0px; padding: 0px;">
+                            <td colspan="3" style="font-family: 'Montserrat',sans-serif; margin: 0px; padding: 0px; width: 30px;"></td>
+                        </tr>
+                        <!--  -->
+                        <tr style="font-family: 'Montserrat',sans-serif; margin: 0px; padding: 0px;">
+                            <td style="font-family: 'Montserrat',sans-serif; margin: 0px; padding: 0px; width: 30px;"></td>
+                            <td style="font-family: 'Montserrat',sans-serif; margin: 0px; padding: 0px;"><span style="font-family: 'Montserrat',sans-serif; color: #000; font-size: 16px; font-weight: 500; margin: 0px; padding: 0px;">"BookSender"</span></td>
+                            <td style="font-family: 'Montserrat',sans-serif; margin: 0px; padding: 0px; width: 30px;"></td>
+                        </tr>
+                        <tr height="10px" style="font-family: 'Montserrat',sans-serif; margin: 0px; padding: 0px;">
+                            <td colspan="3" style="font-family: 'Montserrat',sans-serif; margin: 0px; padding: 0px; width: 30px;"></td>
+                        </tr>
+                        <!--  -->
+                        <tr style="font-family: 'Montserrat',sans-serif; margin: 0px; padding: 0px;">
+                            <td style="font-family: 'Montserrat',sans-serif; margin: 0px; padding: 0px; width: 30px;"></td>
+                            <td style="font-family: 'Montserrat',sans-serif; margin: 0px; padding: 0px;"><a style="font-family: 'Montserrat',sans-serif; color: #2869CA; font-size: 14px; font-weight: 400; margin: 0px; padding: 0px;" href="https://127.0.0.1:8000">BookSender.ua</a></td>
+                            <td style="font-family: 'Montserrat',sans-serif; margin: 0px; padding: 0px; width: 30px;"></td>
+                        </tr>
+                        <tr height="20px" style="font-family: 'Montserrat',sans-serif; margin: 0px; padding: 0px;">
+                            <td colspan="3" style="font-family: 'Montserrat',sans-serif; margin: 0px; padding: 0px; width: 30px;"></td>
+                        </tr>
+                        <!--  -->
+                        </tbody>
+                    </table>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+</body>
+
+</html>
