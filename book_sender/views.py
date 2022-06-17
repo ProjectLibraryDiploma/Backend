@@ -20,6 +20,12 @@ def send_email_message(subject, recipient_list, html, text="", from_email=settin
     return msg.send()
 
 
+def send_confirmation_link(user, token):
+    context = {"email_url": "http://127.0.0.1:8000/check_email/{}".format(token)}
+    html = get_template("email_confirmation.html").render(context)
+    send_email_message(subject="Email confirmation", recipient_list=[user.email], html=html, from_email=settings.EMAIL_HOST_USER)
+
+
 def send_email_to_users():
     data = {}
     for client in Client.objects.all():
@@ -49,7 +55,8 @@ class GetEmailConfirmarionView(View):
     def post(self, request):
         user = Client.objects.get_or_create(email=request.POST['email'])[0]
         Token.objects.filter(client_email=user).all().delete()
-        send_confirmation_link(user)
+        token = Token.objects.create(client_email=user)
+        send_confirmation_link(user, token.value)
         messages.error(request, 'Посилання було відправлено на вашу email адресу')
         return redirect("home")
 
