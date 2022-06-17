@@ -3,11 +3,15 @@ from uuid import uuid4
 
 from django.contrib.auth.models import AbstractUser
 from django.db import models
+from django.template.loader import get_template
 from django.utils.translation import gettext_lazy as _
+
+from Backend import settings
+from book_sender.views import send_email_message
 
 
 class Category(models.Model):
-    name = models.CharField("Category name", max_length=255, primary_key=True)
+    name = models.CharField("Category name", max_length=255, unique=True)
     # Add image field
 
     class Meta:
@@ -17,6 +21,23 @@ class Category(models.Model):
     def __str__(self):
         return self.name
 
+    @classmethod
+    def notify(cls):
+        data = {}
+        for client in Client.objects.all():
+            changes = False
+            for category in Category.objects.filter(client=client):
+                books = Book.objects.filter(categories=category, is_sended=False).distinct()
+                if books.exists():
+                    changes = True
+                    data[category.name] = books.all()
+
+            context = {"data": data}
+            html = get_template("email_books.html").render(context)
+            if changes:
+                send_email_message(subject="New books", recipient_list=[client.email], html=html,
+                                   from_email=settings.EMAIL_HOST_USER)
+
 
 class Book(models.Model):
     title = models.CharField(_("Book title"), max_length=255)
@@ -24,6 +45,9 @@ class Book(models.Model):
     price = models.IntegerField(_("Price"), blank=True, null=True)
     categories = models.ManyToManyField(Category, related_name="books", verbose_name=_("Categories"))
     is_sended = models.BooleanField(default=False)
+
+    def __str__(self):
+        return self.title + " " + self.author
 
 
 class Client(models.Model):

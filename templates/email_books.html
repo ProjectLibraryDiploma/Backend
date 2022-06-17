@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 {% load static %}
 <html lang="en">
@@ -52,7 +53,12 @@
                             <td style="font-family: 'Montserrat',sans-serif; margin: 0px; padding: 0px; width: 30px;"></td>
                             <td style="font-family: 'Montserrat',sans-serif; margin: 0px; padding: 0px;">
                                     <span class="email-text">
-                                        Для отримання можливості вибору категорій перейдіть по настуаному посиланню: <a href="{{ email_url }}" >Натисніть сюди.
+                                        Ваша підбірка книг:
+                                        {% for category, books in data.items %}
+                                            <h3>{{category }}</h3>
+                                            {% for book in books %}
+                                                {{ book.author }}: {{ book.title }},
+                                            {% endfor %} {% endfor %}
                                     </span>
                             </td>
 

@@ -1,8 +1,7 @@
 from datetime import datetime
 
 from django.contrib import messages
-from django.core.mail import send_mail, EmailMultiAlternatives
-from django.http import HttpResponse
+from django.core.mail import EmailMultiAlternatives
 from django.shortcuts import render, redirect
 from django.template.loader import get_template
 from django.views import View
@@ -15,32 +14,34 @@ from book_sender.models import Category, Book, Client, Token
 from book_sender.serializer import BookSerializer
 
 
-def send_email_message(subject, recipient_list, html, text = "", from_email=settings.EMAIL_HOST_USER):
+def send_email_message(subject, recipient_list, html, text="", from_email=settings.EMAIL_HOST_USER):
     msg = EmailMultiAlternatives(subject, text, from_email, recipient_list)
     msg.attach_alternative(html, "text/html")
     return msg.send()
 
 
 def send_email_to_users():
+    data = {}
     for client in Client.objects.all():
-        books = Book.objects.filter(categories__client=client, is_sended=False).distinct()
-        send_mail(subject="New books",
-        message=str(books.all()[0].title), from_email=settings.EMAIL_HOST_USER, recipient_list=[client.email])
-        for book in books.all():
-            book.is_sended = True
-            book.save()
+        changes = False
+        for category in Category.objects.filter(client=client):
+            books = Book.objects.filter(categories=category, is_sended=False).distinct()
+            if books.exists():
+                changes = True
+                data[category.name] = books.all()
 
-
-def send_confirmation_link(client):
-    token = Token.objects.create(client_email=client)
-    context = {"email_url": "http://127.0.0.1:8000/check_email/{}".format(token.value)}
-    html = get_template("email_confirmation.html").render(context)
-
-    send_email_message(subject="Confirmation link", recipient_list=[client.email], html=html, from_email=settings.EMAIL_HOST_USER)
+        context = {"data": data}
+        html = get_template("email_books.html").render(context)
+        if changes:
+            send_email_message(subject="New books", recipient_list=[client.email], html=html,
+                               from_email=settings.EMAIL_HOST_USER)
 
 
 class HomeView(TemplateView):
     template_name = "home.html"
+
+    def get(self, request):
+        return render(request, "home.html")
 
 
 class GetEmailConfirmarionView(View):
@@ -64,6 +65,7 @@ class ConfirmEmailView(View):
             request.session['token'] = str(new_token.value)
             return redirect('choose_category')
         else:
+            messages.error(request, 'Час дії посилання вичерпано. Ще раз введіть імейл')
             return redirect('home')
 
 
@@ -71,15 +73,44 @@ class ChooseCategoryView(TemplateView):
     template_name = "categories.html"
 
     def get(self, request):
-        return render(request, "categories.html", {"categories": Category.objects.all()})
+        try:
+            value = request.session['token']
+        except KeyError:
+            messages.error(request, 'Час дії посилання вичерпано. Ще раз введіть імейл')
+            return redirect('home')
+        token = Token.objects.filter(value=request.session['token'], expiration_time__gt=datetime.now())
+        if token.exists():
+            client = Client.objects.filter(token=token.first()).first()
+            return render(
+                request,
+                "categories.html",
+                {"categories": Category.objects.all(), "client_cateories": Category.objects.filter(client=client)}
+            )
+        else:
+            messages.error(request, 'Час дії посилання вичерпано. Ще раз введіть імейл')
+            return redirect('home')
 
     def post(self, request):
-        for names in request.POST:
-            if names != 'csrfmiddlewaretoken' and names != 'token':
-                category = Category.objects.filter(name=names)
-                if category.exists():
-                    Client.objects.filter(token__value=request.POST['token']).first().categories.add(category.all())
-        return HttpResponse('ok')
+        try:
+            value = request.session['token']
+        except KeyError:
+            messages.error(request, 'Час дії посилання вичерпано. Ще раз введіть імейл')
+            return redirect('home')
+        token = Token.objects.filter(value=request.session['token'], expiration_time__gt=datetime.now())
+        if token.exists():
+            client = Client.objects.filter(token=token.first()).first()
+            client.categories.clear()
+            for name in request.POST:
+                if name != 'csrfmiddlewaretoken':
+                    category = Category.objects.filter(id=name)
+                    if category.exists():
+                        client.categories.add(category.first())
+            messages.error(request, 'Нові обрані категорії збережено')
+            token.delete()
+            return redirect('home')
+        else:
+            messages.error(request, 'Час дії посилання вичерпано. Ще раз введіть імейл')
+            return redirect('home')
 
 
 class GetNewBooks(ViewSet):
@@ -99,6 +130,3 @@ class GetNewBooks(ViewSet):
                     current_book.save()
         send_email_to_users()
         return Response(status=200)
-
-
-

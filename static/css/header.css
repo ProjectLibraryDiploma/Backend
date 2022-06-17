@@ -34,7 +34,13 @@ a{
 .bg-algolearn-yellow {
     background-color: rgba(240, 216, 121, 0.7);
 }
+.category-select {
+  opacity: 1;
+}
 
+.category-select:hover {
+  opacity: 0.6;
+}
 .text-algolearn-grey {
     color: rgba(230, 230, 230, 1);
 }
