@@ -10,7 +10,7 @@ from rest_framework.response import Response
 from rest_framework.viewsets import ViewSet
 
 from Backend import settings
-from book_sender.models import Category, Book, Client, Token
+from book_sender.models import Book, Client, Token, Category
 from book_sender.serializer import BookSerializer
 
 

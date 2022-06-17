@@ -7,7 +7,6 @@ from django.template.loader import get_template
 from django.utils.translation import gettext_lazy as _
 
 from Backend import settings
-from book_sender.views import send_email_message
 
 
 class Category(models.Model):
@@ -20,23 +19,6 @@ class Category(models.Model):
 
     def __str__(self):
         return self.name
-
-    @classmethod
-    def notify(cls):
-        data = {}
-        for client in Client.objects.all():
-            changes = False
-            for category in Category.objects.filter(client=client):
-                books = Book.objects.filter(categories=category, is_sended=False).distinct()
-                if books.exists():
-                    changes = True
-                    data[category.name] = books.all()
-
-            context = {"data": data}
-            html = get_template("email_books.html").render(context)
-            if changes:
-                send_email_message(subject="New books", recipient_list=[client.email], html=html,
-                                   from_email=settings.EMAIL_HOST_USER)
 
 
 class Book(models.Model):
