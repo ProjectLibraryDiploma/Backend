@@ -30,6 +30,13 @@
       {% load static %}
       <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
       <link rel="stylesheet" type="text/css" href="{% static "css/header.css" %}" />
+      <script type="text/javascript">
+            function MyFunction(){
+                var el = document.querySelector(".category")
+                el.scrollIntoView({behavior: "smooth"})
+            }
+
+        </script>
       <div class="min-vh-100 bg-algolearn-yellow container-fluid">
          <nav class="navbar bg-algolearn-navbar sticky-top row">
             <div class="container-fluid font-algolearn-arial">
@@ -39,9 +46,20 @@
                <div class="container offset-lg-5 col-lg-2 col-auto text-algolearn-red bg-algolearn-grey rounded-pill text-center">
                </div>
                <div class="container col-lg-2 col-auto text-algolearn-grey bg-algolearn-red rounded-pill text-center">
+                   <a href="#" onclick="MyFunction();return false" class="to-category nav-link text-algolearn-grey">Ввести телеграм логін</a>
                </div>
             </div>
          </nav>
+            {% if messages %}
+            {% for message in messages %}
+            <div class="alert alert-primary alert-dismissible fade show mx-5" role="alert">
+                {{ message }}
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            {% endfor %}
+            {% endif %}
          <form action="#" method="post" >
             {% csrf_token %}
             {% for category in categories %}
@@ -79,8 +97,8 @@
       </div>
       <div class = "bg-algolearn-navbar min-vh-100   text-white">
          <div class="text-center pt-4 pt-md-5">
-            <h1 class="d-none d-md-block"><strong>Отзывы</strong></h1>
-            <h2 class="d-md-none"><strong>Отзывы</strong></h2>
+            <h1 class="d-none d-md-block"><strong>Відгуки</strong></h1>
+            <h2 class="d-md-none"><strong>Відгуки</strong></h2>
          </div>
          <div class="bg-algolearn-navbar text-white">
             <div id="fb_carausel" class="carousel slide py-2 py-md-5" data-ride="carousel">
@@ -119,14 +137,14 @@
                <img alt="image" class="img-fluid mw-100" src="{% static 'images/books.jpg' %}">
             </div>
             <div class="container-fluid col-md-4 col-12">
-               <h2 class="font-weight-bold">Виберіть категорії</h2>
-               <p class="lead my-1">Для вибору категорії введіть email у поле нижче. Ми надішлемо ва на пошту посилання при переході на яке ви зможете обрати улюбленні категорії</p>
+               <h2 class="font-weight-bold">Підключить розсилку телеграм бота</h2>
+               <p class="lead my-1">Для отимання повідомлень у телегам введіть свій телегам нік у поле нижче та почніть спілкування з нашим телегра ботом</p>
                <hr class="my-3">
                <p class="lead">
-               <form method="post" action="email/">
+               <form method="post" action="telegram_login/">
                   {% csrf_token %}
                   <div class="form-group">
-                     <input type="email" name="email" placeholder="Enter email">
+                     <input type="text" name="telegram_login" placeholder="Enter telegram login">
                   </div>
                   <button type="submit" class="btn bg-algolearn-navbar text-algolearn-grey btn-lg">Submit</button>
                </form>

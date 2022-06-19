@@ -57,7 +57,7 @@
                                         {% for category, books in data.items %}
                                             <h3>{{category }}</h3>
                                             {% for book in books %}
-                                                {{ book.author }}: {{ book.title }},
+                                                Author: {{ book.author }} Title: {{ book.title }}, <br>
                                             {% endfor %} {% endfor %}
                                     </span>
                             </td>

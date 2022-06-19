@@ -14,7 +14,7 @@ class Category(models.Model):
     # Add image field
 
     class Meta:
-        verbose_name = "Caategory"
+        verbose_name = "Category"
         verbose_name_plural = "Categories"
 
     def __str__(self):
@@ -36,6 +36,7 @@ class Client(models.Model):
     email = models.EmailField(_("Email"), primary_key=True)
     categories = models.ManyToManyField(Category, related_name="client", verbose_name=_("Categories"), blank=True)
     telegram_login = models.CharField(max_length=255, blank=True)
+    telegram_id = models.CharField(max_length=255, blank=True)
 
 
 class Token(models.Model):

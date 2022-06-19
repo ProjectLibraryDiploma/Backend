@@ -17,7 +17,8 @@ from django.contrib import admin
 from django.urls import path
 from rest_framework import routers
 
-from book_sender.views import GetNewBooks, HomeView, GetEmailConfirmarionView, ConfirmEmailView, ChooseCategoryView
+from book_sender.views import GetNewBooks, HomeView, GetEmailConfirmarionView, ConfirmEmailView, ChooseCategoryView, \
+    TelegramLoginView
 
 router = routers.SimpleRouter()
 router.register(r'get_books', GetNewBooks, basename="Books")
@@ -28,6 +29,7 @@ urlpatterns = [
     path('check_email/<token>', ConfirmEmailView.as_view()),
     path('select_categories/', ChooseCategoryView.as_view(), name='choose_category'),
     path('admin/', admin.site.urls),
+    path('select_categories/telegram_login/', TelegramLoginView.as_view())
 ]
 
 urlpatterns += router.urls
