@@ -19,7 +19,8 @@ def start(m, res=False):
     cur = conn.cursor()
     cur.execute("SELECT * FROM book_sender_client WHERE telegram_login='{}' ".format(telegram_login))
     clients = cur.fetchall()
-
+    print(clients)
+    print(len(clients))
     if len(clients):
         cur.execute("UPDATE book_sender_client SET telegram_id='{}' WHERE telegram_login='{}'".format(m.chat.id, telegram_login))
         conn.commit()
